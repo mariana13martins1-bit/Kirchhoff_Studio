@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
+import { Menu, X } from 'lucide-react';
 
 const heroSets = [
   {
@@ -62,6 +63,7 @@ const heroSets = [
 export default function HeroSection() {
   const [currentSetIndex, setCurrentSetIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const nextSet = useCallback(() => {
     setCurrentSetIndex((prev) => (prev + 1) % heroSets.length);
@@ -73,17 +75,24 @@ export default function HeroSection() {
     return () => clearInterval(interval);
   }, [isAutoPlaying, nextSet]);
 
+  useEffect(() => {
+  if (isMenuOpen) {
+    document.body.style.overflow = 'hidden';
+  } else {
+    document.body.style.overflow = 'unset';
+  }
+}, [isMenuOpen]);
+
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden bg-black">
       
-      {/* BACKGROUND SPLIT SYSTEM - MANTEVE O DESLIZE VERTICAL */}
+      {/* BACKGROUND SPLIT SYSTEM */}
       <div className="absolute inset-0 flex w-full h-full">
       {[0, 1, 2].map((columnIndex) => (
         <div 
           key={columnIndex} 
-          // Add 'hidden md:block' to columns 1 and 2, so only 0 shows on mobile
           className={`relative flex-1 h-full overflow-hidden border-r border-white/5 last:border-r-0 
-            ${columnIndex > 0 ? 'hidden md:block' : 'block'}`}
+              ${columnIndex > 1 ? 'hidden md:block' : 'block'}`}
         >
             <div 
               className="absolute inset-0 w-full h-full transition-transform"
@@ -94,11 +103,10 @@ export default function HeroSection() {
                 transitionDelay: `${columnIndex * 300}ms` 
               }}
             >
-              {/* Renderizamos cada Set verticalmente dentro da coluna */}
               {heroSets.map((set, setIndex) => (
                 <div key={setIndex} className="w-full h-full flex-shrink-0 overflow-hidden">
                   <img
-                    src={set.images[columnIndex]}
+                    src={set.images[columnIndex].replace('/upload/', '/upload/f_auto,q_auto,w_1000/')}
                     alt={`${set.category} ${columnIndex}`}
                     className={`w-full h-full object-cover grayscale-[30%] brightness-[0.4] transition-transform duration-[5000ms] ease-out ${
                       currentSetIndex === setIndex ? 'scale-110' : 'scale-100'
@@ -116,10 +124,37 @@ export default function HeroSection() {
         <span className="font-serif text-[16px] text-white tracking-[0.2em] uppercase">Kirchhoff Studio</span>
         <div className="hidden md:flex items-center gap-10">
           <a href="#portfolio" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Portfolio</a>
+          <a href="#about" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">About me</a>
           <a href="#travel" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Travel</a>
           <a href="#contact" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Contact</a>
         </div>
+
+        {/* Mobile Menu Toggle */}
+        <button 
+          className="md:hidden text-white z-50 p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
+        </button>
       </nav>
+
+      {/* MOBILE SIDEBAR */}
+      <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-lg transition-transform duration-700 ease-in-out md:hidden ${
+        isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+      }`}>
+        <div className="flex flex-col items-center justify-center h-full space-y-12">
+          {['Portfolio', 'About me', 'Travel', 'Contact'].map((item) => (
+            <a 
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-white text-2xl font-serif tracking-[0.2em] uppercase opacity-80 hover:opacity-100"
+            >
+              {item}
+            </a>
+          ))}
+        </div>
+      </div>
 
       {/* CONTENT */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center select-none pointer-events-none">
@@ -147,7 +182,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-8 left-8 lg:left-16 z-30 text-white/30 text-[10px] tracking-[0.3em] uppercase">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 md:left-16 md:translate-x-0 z-30 text-white/30 text-[10px] tracking-[0.3em] uppercase">
         0{currentSetIndex + 1} / 0{heroSets.length}
       </div>
     </section>

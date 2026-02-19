@@ -28,7 +28,6 @@ export default function ContactSection() {
     const ctx = gsap.context(() => {
       if (!sectionRef.current) return;
       
-      // Animation for the large typography and form elements
       gsap.fromTo([textRef.current, formRef.current?.children],
         { y: 60, opacity: 0 },
         {
