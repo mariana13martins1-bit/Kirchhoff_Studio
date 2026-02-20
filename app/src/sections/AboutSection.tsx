@@ -65,33 +65,36 @@ export default function AboutSection() {
       id="about" 
       className="py-24 lg:py-32 px-8 lg:px-24 bg-black text-white overflow-hidden"
     >
-      <div className="max-w-screen-2xl mx-auto">
+      <div className="max-w-screen-xl mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
           
           {/* Image Side */}
-          <div ref={imageRef} className="relative group will-change-transform">
-            <div className="aspect-[4/5] md:aspect-[3/4] max-h-[70vh] md:max-h-none overflow-hidden transition-all duration-700">
-              <img
-                src={getOptimizedUrl(faceCard.image, 800)}
-                srcSet={`
-                  ${getOptimizedUrl(faceCard.image, 600)} 600w,
-                  ${getOptimizedUrl(faceCard.image, 1000)} 1000w,
-                  ${getOptimizedUrl(faceCard.image, 1600)} 1600w
-                `}
-                sizes="(max-width: 768px) 100vw, 50vw"
-                alt="Kirchhoff - Photographer"
-                loading="eager"
-                decoding="async"
-                className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s] ease-out"
-              />
+          <div ref={imageRef} className="relative group will-change-transform flex justify-center lg:justify-start">
+            <div className="relative w-full max-w-[320px] md:max-w-[450px] lg:max-w-[500px]">
+              
+              <div className="aspect-[4/5] md:aspect-[3/4] overflow-hidden transition-all duration-700">
+                <img
+                  src={getOptimizedUrl(faceCard.image, 800)}
+                  srcSet={`
+                    ${getOptimizedUrl(faceCard.image, 600)} 600w,
+                    ${getOptimizedUrl(faceCard.image, 1000)} 1000w
+                  `}
+                  sizes="(max-width: 768px) 320px, 500px"
+                  alt="Kirchhoff - Photographer"
+                  loading="eager"
+                  className="w-full h-full object-cover scale-105 group-hover:scale-100 transition-transform duration-[2s] ease-out"
+                />
+              </div>
+
+              {/* Minimalist Architectural Borders - Ajustado para acompanhar o novo tamanho */}
+              <div className="absolute -bottom-3 -right-3 md:-bottom-6 md:-right-6 w-full h-full border border-white/10 -z-10 transition-transform duration-700 group-hover:translate-x-2 group-hover:translate-y-2" />
             </div>
-            {/* Minimalist Architectural Borders */}
-            <div className="absolute -bottom-2 -right-2 md:-bottom-4 md:-right-4 w-full h-full border border-white/10 -z-10 transition-transform duration-700 group-hover:translate-x-2 group-hover:translate-y-2" />
           </div>
 
           {/* Content Side */}
           <div ref={contentRef} className="space-y-8">
             <div>
+              <div className="max-w-md">
               <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-6 font-medium">The Perspective</p>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tight uppercase leading-[1.1] md:leading-[0.9] mb-8">
               Capturing <br />
@@ -133,6 +136,7 @@ export default function AboutSection() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </section>
   );

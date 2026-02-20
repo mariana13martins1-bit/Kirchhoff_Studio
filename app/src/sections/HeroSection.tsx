@@ -92,7 +92,7 @@ export default function HeroSection() {
         <div 
           key={columnIndex} 
           className={`relative flex-1 h-full overflow-hidden border-r border-white/5 last:border-r-0 
-              ${columnIndex > 1 ? 'hidden md:block' : 'block'}`}
+              ${columnIndex !== 1 ? 'hidden md:block' : 'block'}`}
         >
             <div 
               className="absolute inset-0 w-full h-full transition-transform"
@@ -131,30 +131,30 @@ export default function HeroSection() {
 
         {/* Mobile Menu Toggle */}
         <button 
-          className="md:hidden text-white z-50 p-2"
+          className="md:hidden text-white z-50 p-2 fixed top-6 right-6" // Adicionei 'fixed' para o botão não fugir no scroll
           onClick={() => setIsMenuOpen(!isMenuOpen)}
         >
-          {isMenuOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
+          {isMenuOpen ? <X size={28} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
         </button>
       </nav>
 
-      {/* MOBILE SIDEBAR */}
-      <div className={`fixed inset-0 z-40 bg-black/95 backdrop-blur-lg transition-transform duration-700 ease-in-out md:hidden ${
-        isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-      }`}>
-        <div className="flex flex-col items-center justify-center h-full space-y-12">
-          {['Portfolio', 'About me', 'Travel', 'Contact'].map((item) => (
-            <a 
-              key={item}
-              href={`#${item.toLowerCase()}`}
-              onClick={() => setIsMenuOpen(false)}
-              className="text-white text-2xl font-serif tracking-[0.2em] uppercase opacity-80 hover:opacity-100"
-            >
-              {item}
-            </a>
-          ))}
+        {/* MOBILE SIDEBAR */}
+        <div className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-xl transition-transform duration-700 ease-in-out md:hidden ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}>
+          <div className="flex flex-col items-center justify-center h-full space-y-12">
+            {['Portfolio', 'About me', 'Travel', 'Contact'].map((item) => (
+              <a 
+                key={item}
+                href={`#${item.toLowerCase().replace(/\s/g, '')}`} 
+                onClick={() => setIsMenuOpen(false)}
+                className="text-white text-3xl font-serif tracking-[0.2em] uppercase opacity-90 hover:opacity-100 transition-opacity"
+              >
+                {item}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
 
       {/* CONTENT */}
       <div className="absolute inset-0 z-20 flex flex-col items-center justify-center select-none pointer-events-none">

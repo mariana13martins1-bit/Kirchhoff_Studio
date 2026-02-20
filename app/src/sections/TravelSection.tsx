@@ -83,22 +83,21 @@ export default function TravelSection() {
       ref={mapRef}
       src="/worldmap.avif" 
       alt=""
-      // Change right-[12%] to right-0 on mobile for better alignment
-      className="absolute top-0 right-0 lg:right-[12%] w-[50%] lg:w-[40%] h-auto object-contain pointer-events-none grayscale opacity-0 z-0"
+
+      className="hidden lg:block absolute top-10 right-[12%] w-[38%] h-auto object-contain pointer-events-none grayscale opacity-0 z-0"
     />
        
       <div className="max-w-screen-2xl mx-auto relative z-10">
         
-        {/* Header Block: Negative margin pulls the title up to "link" with the Portfolio */}
-        <div ref={headerRef} className="max-w-2xl mb-16 -mt-6 lg:-mt-12">
-          <p className="text-[10px] uppercase tracking-[0.5em] text-white/30 mb-4 ">Current Journey</p>
-        <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl tracking-tight uppercase leading-[0.9] lg:leading-[0.8] mb-8 text-white">
-          Travel <br />
-          <span className="italic font-light text-white/50">Archive</span>
-        </h2>
+        {/* Header Block: Alinhado à esquerda como fizemos no Portfólio */}
+        <div ref={headerRef} className="max-w-2xl mb-20 lg:mb-24">
+          <p className="text-[10px] uppercase tracking-[0.5em] text-white/30 mb-4">Current Journey</p>
+          <h2 className="font-serif text-5xl sm:text-6xl md:text-8xl tracking-tight uppercase leading-[0.9] text-white">
+            Travel <br />
+            <span className="italic font-light text-white/50">Archive</span>
+          </h2>
 
-          {/* Middle Phrase: Maintains the established hierarchy */}
-          <p className="mt-10 text-[11px] uppercase tracking-[0.3em] text-white/30 font-light leading-relaxed">
+          <p className="mt-8 text-[11px] uppercase tracking-[0.3em] text-white/30 font-light leading-relaxed">
             Danish eyes, <br /> 
             global perspectives.
           </p>
@@ -107,27 +106,27 @@ export default function TravelSection() {
         {/* Two Column Grid: Wide gap for a spacious, editorial feel */}
         <div ref={gridRef} className="grid grid-cols-1 lg:grid-cols-2 gap-y-16 lg:gap-y-24 lg:gap-x-40">
           
-          {/* Column 1: Current Status */}
+          {/* Column 1: Current Base */}
           <div className="travel-element">
             <p className="text-[10px] uppercase tracking-[0.4em] text-white/45 mb-10 pb-4 border-b border-white/5 w-full">Current Base</p>
             <div className="group cursor-default">
-               <h3 className="font-serif text-5xl md:text-7xl uppercase mb-4 group-hover:italic transition-all duration-500 text-white">Porto</h3>
-               <p className="text-[12px] uppercase tracking-widest text-white/30 mb-12">Portugal</p>
+               <h3 className="font-serif text-6xl md:text-7xl uppercase mb-4 group-hover:italic transition-all duration-500 text-white">Porto</h3>
+               <p className="text-[12px] uppercase tracking-widest text-white/30 mb-10">Portugal</p>
                <div className="flex items-center gap-4">
                   <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.3)]" />
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-white/40">Available for local booking & projects</span>
+                  <span className="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/40">Available for local booking</span>
                </div>
             </div>
           </div>
 
-          {/* Column 2: History & CTA */}
+          {/* Column 2: History */}
           <div className="travel-element">
             <p className="text-[10px] uppercase tracking-[0.4em] text-white/45 mb-10 pb-4 border-b border-white/5 w-full">Recently Visited</p>
-            <div className="grid grid-cols-2 gap-x-12 gap-y-16">
+            <div className="grid grid-cols-2 gap-x-8 gap-y-12 md:gap-x-12">
               {pastLocations.map((loc, i) => (
                 <div key={i} className="group">
-                  <h5 className="font-serif text-2xl uppercase text-white group-hover:text-white transition-colors">{loc.city}</h5>
-                  <p className="text-[10px] uppercase tracking-widest text-white/20 mt-2">{loc.month}</p>
+                  <h5 className="font-serif text-xl md:text-2xl uppercase text-white">{loc.city}</h5>
+                  <p className="text-[9px] uppercase tracking-widest text-white/20 mt-2">{loc.month}</p>
                 </div>
               ))}
             </div>

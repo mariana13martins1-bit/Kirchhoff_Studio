@@ -61,9 +61,9 @@ export default function PortfolioSection() {
     <section ref={sectionRef} id="portfolio" className="py-24 lg:py-32 bg-black text-white selection:bg-white selection:text-black">
       <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
         
-        {/* Header & Filter Nav */}
-        <div className="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
-          <div className="max-w-md">
+        {/* Header & Filter Nav - Ajustado para alinhar à esquerda no mobile */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
+          <div className="max-w-md text-left"> {/* Forçamos text-left aqui */}
             <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-1">The selected of</p>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tight uppercase">Portfolio</h2>
             <p className="mt-4 text-[11px] uppercase tracking-[0.3em] text-white/50 font-light leading-relaxed italic">
@@ -72,7 +72,8 @@ export default function PortfolioSection() {
             </p>
           </div>
 
-          <nav className="flex gap-6 border-b border-white/5 pb-2 overflow-x-auto w-full md:w-auto no-scrollbar px-2 md:px-0">
+          {/* Filtros também alinhados à esquerda no mobile */}
+          <nav className="flex gap-6 border-b border-white/5 pb-2 overflow-x-auto w-full md:w-auto no-scrollbar self-start md:self-auto px-0">
             {vibes.map((vibe) => (
               <button
                 key={vibe.id}

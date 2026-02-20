@@ -98,16 +98,16 @@ try {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  return (
+ return (
     <section 
       ref={sectionRef}
       id="contact" 
-      className="pt-32 lg:pt-48 pb-0 px-8 lg:px-24 bg-black text-white overflow-hidden"
+      className="pt-24 lg:pt-48 pb-0 px-8 lg:px-24 bg-black text-white overflow-hidden"
     >
-      <div className="max-w-screen-2xl mx-auto grid lg:grid-cols-2 gap-24 items-start">
+      <div className="max-w-screen-2xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-24 items-start">
   
-      {/* Left Column: Bold Typography */}
-      <div ref={textRef} className="space-y-12">
+      {/* COLUNA ESQUERDA: Contact Info */}
+      <div ref={textRef} className="space-y-12 w-full">
         <div>
           <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-8">Booking</p>
           <h2 className="font-serif text-6xl md:text-8xl leading-tight tracking-tight uppercase">
@@ -117,15 +117,15 @@ try {
           </h2>
         </div>
       
-      <div className="space-y-8 pt-12 border-t border-white/10 max-w-sm">
-        <div className="flex items-center gap-6">
-          <Mail className="w-4 h-4 text-white/30" />
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">mathilde@kirchhoffstudio.com</p>
-        </div>
-        <div className="flex items-center gap-6">
-          <MapPin className="w-4 h-4 text-white/30" />
-          <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">Porto - Available Worldwide</p>
-        </div>
+        <div className="space-y-8 pt-12 border-t border-white/10 max-w-sm">
+          <div className="flex items-center gap-6">
+            <Mail className="w-4 h-4 text-white/30" />
+            <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">mathilde@kirchhoffstudio.com</p>
+          </div>
+          <div className="flex items-center gap-6">
+            <MapPin className="w-4 h-4 text-white/30" />
+            <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">Porto - Available Worldwide</p>
+          </div>
 
         {/* Integrated Social Links */}
         <div className="flex items-center gap-6 md:gap-4 pt-4">
@@ -159,26 +159,27 @@ try {
           </div>
         </div>
 
-        {/* Right Column: Minimalist Form */}
+        {/* COLUNA DIREITA: Inquiry Form (Aparece em primeiro no mobile) */}
         <form 
           ref={formRef}
           onSubmit={handleSubmit}
-          className="space-y-12"
+          className="space-y-12 w-full"
         >
+          {/* Grid de Inputs com a fonte ajustada (font-light e tracking) */}
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-12">
             <div className="group relative">
-              <input 
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                className="peer w-full bg-transparent border-b border-white/20 py-4 text-base md:text-sm focus:outline-none focus:border-white transition-colors placeholder-transparent"
-                placeholder="Name"
-                required
-              />
-            <label className="absolute left-0 top-0 text-[11px] lg:text-[10px] uppercase tracking-[0.3em] lg:tracking-widest text-white/30 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:top-0 peer-focus:text-[11px] lg:peer-focus:text-[10px]">
-               Full Name
+            <input 
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              className="peer w-full bg-transparent border-b border-white/20 py-4 text-sm focus:outline-none focus:border-white transition-colors placeholder-transparent"
+              placeholder="Name"
+              required
+            />
+            <label className="absolute left-0 top-0 text-[10px] uppercase tracking-widest text-white/30 transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-sm peer-focus:top-0 peer-focus:text-[10px]">
+              Full Name
             </label>
-            </div>
+          </div>
 
             <div className="group relative">
               <input 
@@ -268,34 +269,38 @@ try {
           </span>
         </div>
 
-          <button 
-            type="submit"
-            disabled={loading}
-            className="group flex items-center gap-4 text-[14px] uppercase tracking-[0.5em] font-medium pt-8 transition-all hover:gap-8"
-          >
-            {loading ? (
-              <Loader2 className="animate-spin w-4 h-4" />
-            ) : submitted ? (
-              "Inquiry Sent Successfully"
-            ) : (
-              <>
-                Send Message <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-2" />
-              </>
-            )}
-          </button>
-          </form>
+        {/* BOTÃO UNIFICADO COM SETA */}
+        <div className="pt-10">
+        <button 
+          type="submit"
+          disabled={loading}
+          className="group w-full md:w-auto flex items-center justify-center gap-8 px-12 py-5 border border-white/10 text-white/90 text-[11px] uppercase tracking-[0.5em] font-semibold transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-50"
+        >
+          {loading ? (
+            <Loader2 className="animate-spin w-4 h-4" />
+          ) : submitted ? (
+            "Inquiry Sent Successfully"
+          ) : (
+            <>
+              Send Message 
+              <ArrowRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-3" />
+            </>
+          )}
+        </button>
       </div>
-
+        </form>
+      </div>
+      
           <div className="w-full mt-16">
-            <div className="w-full h-[1px] bg-white/10" />
+          <div className="w-full h-[1px] bg-white/10" />
 
-            {/* Copyright text aligned with your site's side padding */}
-            <div className="px-8 lg:px-16 pt-10 pb-6 flex justify-center lg:justify-end">
-            <p className="text-[9px] lg:text-[10px] text-center lg:text-right ...">
+          {/* Copyright text com a mesma estilização de 'Booking' */}
+          <div className="pt-10 pb-10 flex justify-center lg:justify-end">
+            <p className="text-[9px] lg:text-[10px] uppercase tracking-[0.5em] text-white/40 font-medium">
               © 2026 KIRCHHOFF STUDIO
             </p>
           </div>
-          </div>
-        </section>
+        </div>
+      </section>
   );
 }
