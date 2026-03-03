@@ -318,7 +318,7 @@ function ContactDetails() {
 
       <div className="flex items-center gap-6 md:gap-4 pt-4">
         <a 
-          href="https://www.instagram.com/kirchhoffstudio..." 
+          href="https://www.instagram.com/kirchhoffstudio"
           target="_blank" 
           rel="noopener noreferrer"
           className="p-4 md:p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
