@@ -13,21 +13,19 @@ export default function PortfolioSection() {
   const gridRef = useRef<HTMLDivElement>(null);
 
   const filteredItems = useMemo(() => {
-    // 1. Cast the imported array so TS knows it's a list of PortfolioItems
-    const allItems = portfolioItems as PortfolioItem[];
+    const allItems = (portfolioItems as PortfolioItem[]).filter(
+      (item) => item.category !== 'about'
+    );
 
     if (activeVibe === 'all') {
-      // 2. Shuffle and Slice to exactly 15
       return [...allItems]
         .sort(() => 0.5 - Math.random())
         .slice(0, 12);
     }
 
-    // 3. Filter using 'any' for the parameter to avoid the size mismatch error
     return allItems.filter((item: any) => item.category === activeVibe);
   }, [activeVibe]);
 
-  // 2. Animation: Handle GSAP revealing images
   useLayoutEffect(() => {
   const ctx = gsap.context(() => {
     ScrollTrigger.getAll().forEach(st => {
@@ -61,9 +59,9 @@ export default function PortfolioSection() {
     <section ref={sectionRef} id="portfolio" className="py-24 lg:py-32 bg-black text-white selection:bg-white selection:text-black">
       <div className="max-w-screen-2xl mx-auto px-8 lg:px-16">
         
-        {/* Header & Filter Nav - Ajustado para alinhar à esquerda no mobile */}
+        {/* Header & Filter Nav */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-8">
-          <div className="max-w-md text-left"> {/* Forçamos text-left aqui */}
+          <div className="max-w-md text-left">
             <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-1">The selected of</p>
             <h2 className="font-serif text-5xl md:text-7xl tracking-tight uppercase">Portfolio</h2>
             <p className="mt-4 text-[11px] uppercase tracking-[0.3em] text-white/50 font-light leading-relaxed italic">
@@ -72,8 +70,7 @@ export default function PortfolioSection() {
             </p>
           </div>
 
-          {/* Filtros também alinhados à esquerda no mobile */}
-          <nav className="flex gap-6 border-b border-white/5 pb-2 overflow-x-auto w-full md:w-auto no-scrollbar self-start md:self-auto px-0">
+          <nav className="flex gap-8 overflow-x-auto w-full md:w-auto no-scrollbar scroll-smooth">
             {vibes.map((vibe) => (
               <button
                 key={vibe.id}
@@ -83,6 +80,9 @@ export default function PortfolioSection() {
                 }`}
               >
                 {vibe.label}
+                {activeVibe === vibe.id && (
+                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white animate-in fade-in zoom-in duration-500" />
+              )}
               </button>
             ))}
           </nav>

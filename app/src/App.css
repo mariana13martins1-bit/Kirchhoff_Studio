@@ -61,3 +61,12 @@ ion: reduce) {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Removes the ugly bar while keeping the ability to swipe/scroll */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

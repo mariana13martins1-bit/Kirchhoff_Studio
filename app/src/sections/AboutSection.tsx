@@ -62,7 +62,7 @@ export default function AboutSection() {
   return (
     <section 
       ref={sectionRef}
-      id="about" 
+      id="aboutme" 
       className="py-24 lg:py-32 px-8 lg:px-24 bg-black text-white overflow-hidden"
     >
       <div className="max-w-screen-xl mx-auto">
@@ -103,24 +103,31 @@ export default function AboutSection() {
             </h2>
             </div>
             
-            <div className="space-y-6 max-w-lg">
-              <p className="text-sm text-white/60 leading-relaxed font-light tracking-wide">
-                Hi, I'm a photographer working across sports, events, and brand storytelling. 
-                Rooted in Danish minimalism, my lens documents the raw energy of Aarhus and the sun-drenched alleys of Porto.
-              </p>
-              <p className="text-sm text-white/60 leading-relaxed font-light tracking-wide">
-                I believe the most compelling narratives happen when the camera disappears. 
-                Whether documenting a high-speed match or the geometry of Nordic architecture, 
-                I chase the intersection of light and humanity.
+            <div className="space-y-8 max-w-xl">
+            {/* First Block: Philosophy & Style */}
+            <div className="space-y-4">
+              <p className="text-sm text-white/70 leading-relaxed font-light tracking-wide">
+                I create emotion-driven imagery that captures moments with depth, atmosphere, and intention. 
+                My work is rooted in storytelling - focusing on movement, connection, and the subtle details. 
+                Rather than staging perfection, I document authenticity as it naturally unfolds.
               </p>
             </div>
 
+            <div className="space-y-4">
+              <p className="text-sm text-white/60 leading-relaxed font-light tracking-wide">
+                From high-energy environments to intimate milestones, I approach every shoot with a calm, observant eye and a strong sense of narrative. 
+                I aim to deliver images that feel timeless, powerful, and emotionally real. 
+                Each frame is crafted to preserve the feeling of the moment, not just how it looked.
+              </p>
+            </div>
+          </div>
+
             {/* Integrated Social Links */}
-            <div className="flex items-center gap-4 pt-4">
+            <div className="flex items-center gap-4 pt-8">
               {[
                 { href: "https://www.instagram.com/kirchhoffstudio", icon: <Instagram className="w-3.5 h-3.5" />, label: "Instagram" },
                 { href: "https://www.linkedin.com/in/mathilde-kirchhoff-1a5aa021a/", icon: <Linkedin className="w-3.5 h-3.5" />, label: "LinkedIn" },
-                { href: "mailto:hello@kirchhoff.studio", icon: <Mail className="w-3.5 h-3.5" />, label: "Email" }
+                { href: "mailto:kirchhoffstudio@gmail.com", icon: <Mail className="w-3.5 h-3.5" />, label: "Email" }
               ].map((link, idx) => (
                 <a 
                   key={idx}

@@ -5,6 +5,7 @@ import { Mail, MapPin, Calendar, Send, Loader2, ArrowRight, Instagram, Globe, Li
 // @ts-ignore
 import { db } from '../services/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import emailjs from '@emailjs/browser';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,6 +13,7 @@ export default function ContactSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  
 
   const [formData, setFormData] = useState({
     name: '',
@@ -73,15 +75,43 @@ export default function ContactSection() {
     return;
   }
     setLoading(true);
-try {
-  const clientName = formData.name.trim().replace(/\s+/g, '_');
-  
-  const uniqueId = `${clientName}_${Date.now()}`;
+  try {
+    const clientName = formData.name.trim().replace(/\s+/g, '_');
+    
+    const uniqueId = `${clientName}_${Date.now()}`;
 
-  await setDoc(doc(db, "inquiries", uniqueId), {
-    ...formData,
-    createdAt: serverTimestamp(),
-  });
+    await setDoc(doc(db, "inquiries", uniqueId), {
+      ...formData,
+      createdAt: serverTimestamp(),
+    });
+
+    console.log("Service ID:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
+console.log("Public Key:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
+
+  
+    // 2. SEND EMAIL VIA EMAILJS
+    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+    const autoReplyTemplateID = import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID;
+
+    console.log("Auto-Reply Template ID:", import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID);
+
+      await Promise.all([
+      emailjs.send(serviceID, templateID, {
+        name: formData.name,
+        email: formData.email,
+        projectType: formData.projectType,
+        location: formData.location,
+        message: formData.message,
+      }, publicKey),
+      
+      emailjs.send(serviceID, autoReplyTemplateID, {
+        name: formData.name,
+        email: formData.email,
+        projectType: formData.projectType,
+      }, publicKey)
+    ]);
 
   setSubmitted(true);
   setFormData({ name: '', email: '', projectType: '', location: '', message: '' });
@@ -92,7 +122,7 @@ try {
 } finally {
   setLoading(false);
     }
-  };
+};
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -104,60 +134,24 @@ try {
       id="contact" 
       className="pt-24 lg:pt-48 pb-0 px-8 lg:px-24 bg-black text-white overflow-hidden"
     >
-      <div className="max-w-screen-2xl mx-auto flex flex-col-reverse lg:grid lg:grid-cols-2 gap-24 items-start">
+      <div className="max-w-screen-2xl mx-auto flex flex-col lg:grid lg:grid-cols-2 gap-24 items-start">
   
       {/* COLUNA ESQUERDA: Contact Info */}
       <div ref={textRef} className="space-y-12 w-full">
-        <div>
-          <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-8">Booking</p>
-          <h2 className="font-serif text-6xl md:text-8xl leading-tight tracking-tight uppercase">
-            Let's <br /> 
-            <span className="italic font-light text-white/60">Create</span> <br /> 
-            Together
-          </h2>
-        </div>
+      <div>
+        <p className="text-[10px] uppercase tracking-[0.5em] text-white/40 mb-8">Contact</p>
+        <h2 className="font-serif text-6xl md:text-8xl leading-tight tracking-tight uppercase">
+          Let's <br /> 
+          <span className="italic font-light text-white/60">Create</span> <br /> 
+          Together
+        </h2>
+      </div>
       
-        <div className="space-y-8 pt-12 border-t border-white/10 max-w-sm">
-          <div className="flex items-center gap-6">
-            <Mail className="w-4 h-4 text-white/30" />
-            <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">mathilde@kirchhoffstudio.com</p>
-          </div>
-          <div className="flex items-center gap-6">
-            <MapPin className="w-4 h-4 text-white/30" />
-            <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">Porto - Available Worldwide</p>
-          </div>
-
-        {/* Integrated Social Links */}
-        <div className="flex items-center gap-6 md:gap-4 pt-4">
-          <a 
-            href="https://www.instagram.com/kirchhoffstudio?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="p-4 md:p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
-            aria-label="Instagram"
-          >
-            <Instagram className="w-3.5 h-3.5" />
-          </a>
-          <a 
-            href="https://www.linkedin.com/in/mathilde-kirchhoff-1a5aa021a/" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
-            aria-label="LinkedIn"
-          >
-            {/* Using Linkedin icon from lucide-react */}
-            <Linkedin className="w-3.5 h-3.5" />
-          </a>
-          <a 
-            href="mailto:hello@kirchhoff.studio" 
-            className="p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
-            aria-label="Email"
-          >
-            <Mail className="w-3.5 h-3.5" />
-          </a>
+        {/* This div is now HIDDEN on mobile and visible only on Large screens (Desktop) */}
+        <div className="hidden lg:block space-y-8 pt-12 border-t border-white/10 max-w-sm">
+          <ContactDetails />
         </div>
-          </div>
-        </div>
+      </div>
 
         {/* COLUNA DIREITA: Inquiry Form (Aparece em primeiro no mobile) */}
         <form 
@@ -289,6 +283,11 @@ try {
         </button>
       </div>
         </form>
+
+        {/* Mobile Only: Shows social info AFTER the form */}
+        <div className="lg:hidden w-full pt-12 border-t border-white/10 mt-12">
+          <ContactDetails />
+        </div>
       </div>
       
           <div className="w-full mt-16">
@@ -302,5 +301,48 @@ try {
           </div>
         </div>
       </section>
+  );
+}
+
+function ContactDetails() {
+  return (
+    <>
+      <div className="flex items-center gap-6">
+        <Mail className="w-4 h-6 md:h-4 text-white/30" />
+        <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">kirchhoffstudio@gmail.com</p>
+      </div>
+      <div className="flex items-center gap-6">
+        <MapPin className="w-4 h-6 md:h-4 text-white/30" />
+        <p className="text-[11px] uppercase tracking-[0.2em] text-white/80">Porto - Available Worldwide</p>
+      </div>
+
+      <div className="flex items-center gap-6 md:gap-4 pt-4">
+        <a 
+          href="https://www.instagram.com/kirchhoffstudio..." 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-4 md:p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
+          aria-label="Instagram"
+        >
+          <Instagram className="w-3.5 h-3.5" />
+        </a>
+        <a 
+          href="https://www.linkedin.com/in/mathilde-kirchhoff-1a5aa021a/" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
+          aria-label="LinkedIn"
+        >
+          <Linkedin className="w-3.5 h-3.5" />
+        </a>
+        <a 
+          href="mailto:kirchhoffstudio@gmail.com" 
+          className="p-3 rounded-full border border-white/10 text-white/40 hover:text-white hover:border-white transition-all duration-500" 
+          aria-label="Email"
+        >
+          <Mail className="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </>
   );
 }

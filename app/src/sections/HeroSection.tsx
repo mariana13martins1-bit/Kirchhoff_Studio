@@ -5,8 +5,8 @@ const heroSets = [
   {
     category: 'Sports',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351195/DF02DEA6-E76B-4E86-BE17-BD39E0887687_1_105_c_gfkpnc.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351190/BDFBE6FC-B733-44D7-BE16-2F5301956D8B_1_105_c_hvwbka.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351193/D27307F8-FD73-4308-8E93-E519AB45E5C2_1_105_c_wxqcrr.jpg',     
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351162/2D34C55F-ECF7-4FB0-81F9-351EB33765F4_1_105_c_i8wmty.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351186/B2043612-A40C-4DCC-832F-7AF2127E69D6_1_105_c_wbptsj.jpg'
     ]
   },
@@ -81,7 +81,7 @@ export default function HeroSection() {
   } else {
     document.body.style.overflow = 'unset';
   }
-}, [isMenuOpen]);
+  }, [isMenuOpen]);
 
   return (
     <section className="relative h-[100dvh] w-full overflow-hidden bg-black">
@@ -120,35 +120,54 @@ export default function HeroSection() {
       </div>
 
       {/* NAVIGATION */}
-      <nav className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-6 md:px-16 md:py-10">
-        <span className="font-serif text-[16px] text-white tracking-[0.2em] uppercase">Kirchhoff Studio</span>
-        <div className="hidden md:flex items-center gap-10">
-          <a href="#portfolio" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Portfolio</a>
-          <a href="#about" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">About me</a>
-          <a href="#travel" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Travel</a>
-          <a href="#contact" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Contact</a>
-        </div>
+      <nav className="absolute top-0 left-0 right-0 z-50 flex items-center justify-between px-6 py-4 md:px-16 md:py-10 bg-transparent">
+        
+        {/* The Logo: Blends naturally with background colors */}
+        <a href="/" className="transition-opacity duration-500 hover:opacity-70 mt-4 md:mt-0">
+          <img 
+            src="/Kirchhoff.png" 
+            alt="Kirchhoff Studio" 
+            className={`h-12 md:h-16 w-auto object-contain mix-blend-screen transition-all duration-700 ${
+              isMenuOpen ? 'opacity-20' : 'opacity-100'
+            }`}
+          />
+        </a>
+          
+          <div className="hidden md:flex items-center gap-10 md:-mt-6">
+            <a href="#portfolio" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Portfolio</a>
+            <a href="#aboutme" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">About me</a>
+            <a href="#travel" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Travel</a>
+            <a href="#contact" className="text-white/60 hover:text-white text-[10px] uppercase tracking-[0.3em]">Contact</a>
+          </div>
+        </nav>
 
-        {/* Mobile Menu Toggle */}
+        {/* MOBILE TOGGLE */}
         <button 
-          className="md:hidden text-white z-50 p-2 fixed top-6 right-6" // Adicionei 'fixed' para o botão não fugir no scroll
+          className="md:hidden fixed top-6 right-6 z-[70] p-2 text-white transition-transform duration-300 active:scale-90" 
           onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label="Toggle Menu"
         >
-          {isMenuOpen ? <X size={28} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
+          {isMenuOpen ? (
+            <X size={32} strokeWidth={1} className="animate-in fade-in spin-in-90 duration-300" />
+          ) : (
+            <Menu size={24} strokeWidth={1} />
+          )}
         </button>
-      </nav>
 
         {/* MOBILE SIDEBAR */}
-        <div className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-xl transition-transform duration-700 ease-in-out md:hidden ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        <div className={`fixed inset-0 z-50 bg-black/95 backdrop-blur-2xl transition-all duration-700 ease-in-out md:hidden ${
+          isMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}>
-          <div className="flex flex-col items-center justify-center h-full space-y-12">
-            {['Portfolio', 'About me', 'Travel', 'Contact'].map((item) => (
+          <div className="flex flex-col items-center justify-center h-full space-y-10">
+            {['Portfolio', 'About me', 'Travel', 'Contact'].map((item, i) => (
               <a 
                 key={item}
                 href={`#${item.toLowerCase().replace(/\s/g, '')}`} 
                 onClick={() => setIsMenuOpen(false)}
-                className="text-white text-3xl font-serif tracking-[0.2em] uppercase opacity-90 hover:opacity-100 transition-opacity"
+                style={{ transitionDelay: `${i * 100}ms` }}
+                className={`text-white text-3xl font-serif tracking-[0.2em] uppercase transition-all duration-700 ${
+                  isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                }`}
               >
                 {item}
               </a>
@@ -162,7 +181,7 @@ export default function HeroSection() {
           K
         </span>
 
-        <div className="relative z-10 text-center space-y-4">
+        <div className="relative z-10 text-center space-y-1 md:space-y-4">
         <h1 className="font-serif text-[10vw] sm:text-6xl md:text-8xl lg:text-9xl text-white tracking-[0.1em] sm:tracking-[0.4em] uppercase font-light">
             Kirchhoff
         </h1>
