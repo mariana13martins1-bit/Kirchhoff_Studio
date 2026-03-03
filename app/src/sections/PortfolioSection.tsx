@@ -80,7 +80,6 @@ export default function PortfolioSection() {
                 }`}
               >
                 {vibe.label}
-                
               </button>
             ))}
           </nav>
