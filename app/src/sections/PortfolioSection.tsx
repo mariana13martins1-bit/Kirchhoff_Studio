@@ -80,9 +80,7 @@ export default function PortfolioSection() {
                 }`}
               >
                 {vibe.label}
-                {activeVibe === vibe.id && (
-                <div className="absolute bottom-0 left-0 w-full h-[1px] bg-white animate-in fade-in zoom-in duration-500" />
-              )}
+                
               </button>
             ))}
           </nav>
