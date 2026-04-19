@@ -4,6 +4,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioItems, vibes } from '../data/portfolio.ts';
 import type { PortfolioItem } from '../data/portfolio.ts';
 import { getOptimizedUrl } from '../utils/cloudinary';
+import { logEvent } from 'firebase/analytics';
+import { analytics } from '../services/firebase';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -74,7 +76,7 @@ export default function PortfolioSection() {
             {vibes.map((vibe) => (
               <button
                 key={vibe.id}
-                onClick={() => setActiveVibe(vibe.id)}
+                onClick={() => { setActiveVibe(vibe.id); logEvent(analytics, 'portfolio_filter', { category: vibe.id }); }}
                 aria-pressed={activeVibe === vibe.id}
                 className={`text-[9px] whitespace-nowrap uppercase tracking-[0.3em] transition-all duration-500 pb-2 border-b-2 ${
                   activeVibe === vibe.id ? 'text-white border-white' : 'text-white/50 border-transparent hover:text-white/60'

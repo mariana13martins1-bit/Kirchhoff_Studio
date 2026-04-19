@@ -2,8 +2,9 @@ import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, MapPin, Calendar, Send, Loader2, ArrowRight, Instagram, Globe, Linkedin } from 'lucide-react';
-import { db } from '../services/firebase';
+import { db, analytics } from '../services/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
+import { logEvent } from 'firebase/analytics';
 import emailjs from '@emailjs/browser';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -108,11 +109,13 @@ export default function ContactSection() {
       }, publicKey)
     ]);
 
+  logEvent(analytics, 'contact_form_submitted', { projectType: formData.projectType });
   setSubmitted(true);
   setFormData({ name: '', email: '', projectType: '', location: '', message: '' });
   setTimeout(() => setSubmitted(false), 5000);
 } catch (error) {
   console.error("Error:", error);
+  logEvent(analytics, 'contact_form_error');
   setSubmitError(true);
 } finally {
   setLoading(false);
