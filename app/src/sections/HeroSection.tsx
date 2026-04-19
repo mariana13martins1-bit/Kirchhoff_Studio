@@ -37,9 +37,9 @@ const heroSets = [
   {
     category: 'Architecture',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351357/DSC_6743_qhxkbx.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351365/DSC_6752_dfvfeg.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351352/DSC_6724_pkbopc.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664931/DSC_2386_ejq9qv.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664222/DSC_2302_phxmxa.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664935/DSC_2442_izzcz3.jpg'
     ]
   },
   {

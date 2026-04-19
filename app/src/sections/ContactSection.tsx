@@ -293,7 +293,6 @@ console.log("Public Key:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
           <div className="w-full mt-16">
           <div className="w-full h-[1px] bg-white/10" />
 
-          {/* Copyright text com a mesma estilização de 'Booking' */}
           <div className="pt-10 pb-10 flex justify-center lg:justify-end">
             <p className="text-[9px] lg:text-[10px] uppercase tracking-[0.5em] text-white/40 font-medium">
               © 2026 KIRCHHOFF STUDIO
