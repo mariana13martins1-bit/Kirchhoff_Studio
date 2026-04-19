@@ -6,6 +6,7 @@ import type { PortfolioItem } from '../data/portfolio.ts';
 import { getOptimizedUrl } from '../utils/cloudinary';
 import { logEvent } from 'firebase/analytics';
 import { analytics } from '../services/firebase';
+import { reportBrokenImage } from '../utils/reportBrokenImage';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -108,7 +109,10 @@ export default function PortfolioSection() {
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 alt={item.title}
                 loading="lazy"
-                onError={(e) => { (e.currentTarget as HTMLImageElement).style.visibility = 'hidden'; }}
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).style.visibility = 'hidden';
+                  reportBrokenImage(item.image, item.title, item.category);
+                }}
                 className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 will-change-transform grayscale-[20%] group-hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 flex flex-col justify-end p-8">
