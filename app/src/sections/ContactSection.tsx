@@ -2,7 +2,6 @@ import { useRef, useLayoutEffect, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Mail, MapPin, Calendar, Send, Loader2, ArrowRight, Instagram, Globe, Linkedin } from 'lucide-react';
-// @ts-ignore
 import { db } from '../services/firebase';
 import { collection, addDoc, serverTimestamp, setDoc, doc } from 'firebase/firestore';
 import emailjs from '@emailjs/browser';
@@ -85,17 +84,11 @@ export default function ContactSection() {
       createdAt: serverTimestamp(),
     });
 
-    console.log("Service ID:", import.meta.env.VITE_EMAILJS_SERVICE_ID);
-console.log("Public Key:", import.meta.env.VITE_EMAILJS_PUBLIC_KEY);
-
-  
     // 2. SEND EMAIL VIA EMAILJS
     const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
     const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
     const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
     const autoReplyTemplateID = import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID;
-
-    console.log("Auto-Reply Template ID:", import.meta.env.VITE_EMAILJS_AUTO_REPLY_TEMPLATE_ID);
 
       await Promise.all([
       emailjs.send(serviceID, templateID, {
