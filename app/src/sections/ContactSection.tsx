@@ -24,6 +24,7 @@ export default function ContactSection() {
 
   const [loading, setLoading] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState(false);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -74,6 +75,7 @@ export default function ContactSection() {
     return;
   }
     setLoading(true);
+    setSubmitError(false);
   try {
     const clientName = formData.name.trim().replace(/\s+/g, '_');
     
@@ -111,7 +113,7 @@ export default function ContactSection() {
   setTimeout(() => setSubmitted(false), 5000);
 } catch (error) {
   console.error("Error:", error);
-  alert("Something went wrong.");
+  setSubmitError(true);
 } finally {
   setLoading(false);
     }
@@ -258,7 +260,7 @@ export default function ContactSection() {
 
         {/* BOTÃO UNIFICADO COM SETA */}
         <div className="pt-10">
-        <button 
+        <button
           type="submit"
           disabled={loading}
           className="group w-full md:w-auto flex items-center justify-center gap-8 px-12 py-5 border border-white/10 text-white/90 text-[11px] uppercase tracking-[0.5em] font-semibold transition-all duration-500 hover:bg-white hover:text-black disabled:opacity-50"
@@ -269,11 +271,16 @@ export default function ContactSection() {
             "Inquiry Sent Successfully"
           ) : (
             <>
-              Send Message 
+              Send Message
               <ArrowRight className="w-5 h-5 transition-transform duration-500 group-hover:translate-x-3" />
             </>
           )}
         </button>
+        {submitError && (
+          <p className="mt-4 text-[10px] uppercase tracking-widest text-red-400/80">
+            Something went wrong — please try again or email us directly.
+          </p>
+        )}
       </div>
         </form>
 
