@@ -81,7 +81,7 @@ export const portfolioItems = [
   { id: 207, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_1829_bgyoj0.jpg', title: 'Curated style', category: 'portraits', size: 'large' },
   { id: 213, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1772667127/DSC_2350_vuxkgb.jpg', title: 'Winter motion', category: 'portraits', size: 'medium' },
   { id: 208, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3183_gnmroo.jpg', title: 'The Muse', category: 'portraits', size: 'small' },
-  { id: 210, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350795/DSC_2493_v0l7uh.jpg', title: 'Soft Embrace', category: 'portraits', size: 'large' },
+  { id: 210, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_1829_bgyoj0.jpg', title: 'Soft Embrace', category: 'portraits', size: 'large' },
   { id: 211, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350794/DSC_1928_fzfcr0.jpg', title: 'Authentic glow', category: 'portraits', size: 'medium' },
   { id: 212, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350793/DSC_1821_nu0foq.jpg', title: 'Winter motion', category: 'portraits', size: 'small' },
 
