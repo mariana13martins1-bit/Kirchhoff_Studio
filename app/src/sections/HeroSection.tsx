@@ -1,7 +1,15 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 
 const heroSets = [
+  {
+    category: 'Sports',
+    images: [
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397095/DSC_3754_fnzgml.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396539/DSC_3831_ma7ghk.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396530/DSC_4047_u19uer.jpg'
+    ]
+  },
   {
     category: 'Sports',
     images: [
@@ -19,14 +27,6 @@ const heroSets = [
     ]
   },
   {
-    category: 'Portraits',
-    images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg',
-    ]
-  },
-  {
     category: 'Couples',
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg',
@@ -35,11 +35,11 @@ const heroSets = [
     ]
   },
   {
-    category: 'Couples',
+    category: 'Portraits',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351309/DSC_9803_lnqmdo.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351315/DSC_9953_fstufl.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351313/DSC_9937_i8sei8.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg',
     ]
   }
 ];
