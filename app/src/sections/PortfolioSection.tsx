@@ -14,6 +14,7 @@ export default function PortfolioSection() {
   const [activeVibe, setActiveVibe] = useState('all');
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const isFirstRender = useRef(true);
 
   const filteredItems = useMemo(() => {
     const allItems = (portfolioItems as PortfolioItem[]).filter(
@@ -30,33 +31,39 @@ export default function PortfolioSection() {
   }, [activeVibe]);
 
   useLayoutEffect(() => {
-  const ctx = gsap.context(() => {
-    ScrollTrigger.getAll().forEach(st => {
-      if (st.trigger && (st.trigger as HTMLElement).classList.contains('portfolio-item')) {
-        st.kill();
-      }
-    });
-
-    gsap.fromTo(".portfolio-item", 
-      { y: 30, opacity: 0 },
-      { 
-        y: 0, 
-        opacity: 1, 
-        duration: 0.6, 
-        stagger: 0.05, 
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: gridRef.current,
-          start: 'top 85%',
-          toggleActions: 'play none none none',
+    const ctx = gsap.context(() => {
+      ScrollTrigger.getAll().forEach(st => {
+        if (st.trigger && (st.trigger as HTMLElement).classList.contains('portfolio-item')) {
+          st.kill();
         }
-      }
-    );
+      });
 
-    ScrollTrigger.refresh();
-      }, sectionRef);
-      return () => ctx.revert();
-    }, [filteredItems]);
+      if (isFirstRender.current) {
+        isFirstRender.current = false;
+        gsap.fromTo('.portfolio-item',
+          { y: 30, opacity: 0 },
+          {
+            y: 0,
+            opacity: 1,
+            duration: 0.6,
+            stagger: 0.05,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: gridRef.current,
+              start: 'top 85%',
+              toggleActions: 'play none none none',
+            }
+          }
+        );
+      } else {
+        gsap.fromTo('.portfolio-item',
+          { y: 30, opacity: 0 },
+          { y: 0, opacity: 1, duration: 0.6, stagger: 0.05, ease: 'power2.out' }
+        );
+      }
+    }, sectionRef);
+    return () => ctx.revert();
+  }, [filteredItems]);
 
   return (
     <section ref={sectionRef} id="portfolio" className="py-24 lg:py-32 bg-black text-white selection:bg-white selection:text-black">

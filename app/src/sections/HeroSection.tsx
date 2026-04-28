@@ -21,33 +21,25 @@ const heroSets = [
   {
     category: 'Portraits',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_3264_zsepyf.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3180_wsovxm.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_3276_jqgvn7.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg',
     ]
   },
   {
-    category: 'Vet_Clinic',
+    category: 'Couples',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351048/9EFA01F3-7329-4210-840A-3C915380DC02_1_105_c_lfd0yc.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351053/DSC_2743_lpidcw.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351052/DSC_2734_ba3nwm.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg'
     ]
   },
   {
-    category: 'Event_Ida',
+    category: 'Couples',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351288/DSC_1143_eunbqu.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351289/DSC_1150_mgi4zd.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351284/DSC_1112_ko2xs9.jpg'
-    ]
-  },
-  {
-    category: 'Travel_Nature',
-    images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351253/DSC_5691_p0yesa.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351251/DSC_5579_t80arw.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351255/DSC_5696_lcl6tf.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351309/DSC_9803_lnqmdo.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351315/DSC_9953_fstufl.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351313/DSC_9937_i8sei8.jpg'
     ]
   }
 ];
