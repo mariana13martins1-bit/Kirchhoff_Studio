@@ -22,7 +22,7 @@ const heroSets = [
     category: 'Proposal',
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351317/Facetune_25-10-2025-17-14-49_lsiov7.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351321/Facetune_25-10-2025-17-48-03_aiihql.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351323/Facetune_25-10-2025-17-49-07_hpaft2.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351319/Facetune_25-10-2025-17-18-51_aj5b2y.jpg'
     ]
   },
