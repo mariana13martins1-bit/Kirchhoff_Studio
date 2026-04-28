@@ -127,7 +127,7 @@ export default function PortfolioSection() {
                 }}
                 className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 will-change-transform"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 md:opacity-0 md:group-hover:opacity-100 duration-500 flex flex-col justify-end p-8">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent opacity-100 duration-500 flex flex-col justify-end p-8">
                 <p className="text-[9px] uppercase tracking-[0.4em] text-white/50 mb-2">{item.category.replace('_', ' ')}</p>
                 <h3 className="font-serif text-2xl tracking-widest uppercase">{item.title}</h3>
               </div>
