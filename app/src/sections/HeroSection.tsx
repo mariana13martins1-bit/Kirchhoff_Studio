@@ -92,7 +92,7 @@ export default function HeroSection() {
                   <img
                     src={set.images[columnIndex].replace('/upload/', '/upload/f_auto,q_auto,w_1000/')}
                     alt={`${set.category} ${columnIndex}`}
-                    className={`w-full h-full object-cover grayscale-[30%] brightness-[0.4] transition-transform duration-[5000ms] ease-out ${
+                    className={`w-full h-full object-cover brightness-[0.4] transition-transform duration-[5000ms] ease-out ${
                       currentSetIndex === setIndex ? 'scale-110' : 'scale-100'
                     }`}
                   />
