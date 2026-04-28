@@ -203,6 +203,7 @@ export default function ContactSection() {
                 <option value="portrait" className="bg-black">Portraits</option>
                 <option value="couples" className="bg-black">Couples</option>
                 <option value="sports" className="bg-black">Sports</option>
+                <option value="brands" className="bg-black">Brand</option>
 
 
               </select>
