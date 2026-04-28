@@ -97,16 +97,21 @@ export default function PortfolioSection() {
               role="figure"
               aria-label={`${item.title} — ${item.category.replace('_', ' ')}`}
               className={`portfolio-item group relative overflow-hidden bg-[#0a0a0a] transition-all duration-700
-                ${item.size === 'large' ? 'md:row-span-2 aspect-[4/5] md:aspect-[3/4.5]' : 'aspect-[4/5]'}`}
+                ${item.size === 'large' ? 'md:row-span-2 aspect-[4/5] md:aspect-[3/4.5]' : item.size === 'wide' ? 'md:col-span-2 aspect-[16/9]' : 'aspect-[4/5]'}`}
             >
               <img
-                src={getOptimizedUrl(item.image, 800)}
-                srcSet={`
+                src={getOptimizedUrl(item.image, item.size === 'wide' ? 1600 : 800)}
+                srcSet={item.size === 'wide' ? `
+                  ${getOptimizedUrl(item.image, 800)} 800w,
+                  ${getOptimizedUrl(item.image, 1200)} 1200w,
+                  ${getOptimizedUrl(item.image, 1600)} 1600w,
+                  ${getOptimizedUrl(item.image, 2400)} 2400w
+                ` : `
                   ${getOptimizedUrl(item.image, 400)} 400w,
                   ${getOptimizedUrl(item.image, 800)} 800w,
                   ${getOptimizedUrl(item.image, 1200)} 1200w
                 `}
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes={item.size === 'wide' ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'}
                 alt={item.title}
                 loading="lazy"
                 onError={(e) => {

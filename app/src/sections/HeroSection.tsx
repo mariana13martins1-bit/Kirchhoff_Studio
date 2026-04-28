@@ -35,14 +35,6 @@ const heroSets = [
     ]
   },
   {
-    category: 'Architecture',
-    images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664931/DSC_2386_ejq9qv.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664222/DSC_2302_phxmxa.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1772664935/DSC_2442_izzcz3.jpg'
-    ]
-  },
-  {
     category: 'Event_Ida',
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351288/DSC_1143_eunbqu.jpg',

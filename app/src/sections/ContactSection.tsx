@@ -199,12 +199,10 @@ export default function ContactSection() {
                 required
               >
                 <option value="" className="bg-black">Project Type</option>
-                <option value="fashion" className="bg-black">Street / Fashion</option>
                 <option value="events" className="bg-black">Events</option>
                 <option value="portrait" className="bg-black">Portraits</option>
                 <option value="couples" className="bg-black">Couples</option>
                 <option value="sports" className="bg-black">Sports</option>
-                <option value="architecture" className="bg-black">Architecture</option>
 
 
               </select>
