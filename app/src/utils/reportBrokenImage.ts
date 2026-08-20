@@ -1,6 +1,5 @@
 import { setDoc, doc, serverTimestamp } from 'firebase/firestore';
-import { logEvent } from 'firebase/analytics';
-import { db, analytics } from '../services/firebase';
+import { db, logAnalyticsEvent } from '../services/firebase';
 
 const reportedThisSession = new Set<string>();
 
@@ -8,7 +7,7 @@ export async function reportBrokenImage(imageUrl: string, title: string, categor
   if (reportedThisSession.has(imageUrl)) return;
   reportedThisSession.add(imageUrl);
 
-  logEvent(analytics, 'image_load_error', { title, category });
+  logAnalyticsEvent('image_load_error', { title, category });
 
   const docId = encodeURIComponent(imageUrl).slice(0, 500);
   try {

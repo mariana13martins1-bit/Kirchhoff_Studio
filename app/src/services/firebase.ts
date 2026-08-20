@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
+import type { Analytics } from "firebase/analytics";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAMgQHLzldz9bQEBOxUgy7E1sWvwbIegaM",
@@ -13,5 +13,25 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-export const analytics = getAnalytics(app);
 export const db = getFirestore(app);
+
+let analytics: Analytics | undefined;
+let logEventFn: typeof import("firebase/analytics").logEvent | undefined;
+
+// Loaded lazily and swallowed on failure — ad blockers commonly block this
+// chunk (URL contains "analytics"), and a failed static import here would
+// otherwise crash the entire app's module graph before anything renders.
+import("firebase/analytics")
+  .then(async (mod) => {
+    if (await mod.isSupported()) {
+      analytics = mod.getAnalytics(app);
+      logEventFn = mod.logEvent;
+    }
+  })
+  .catch(() => {});
+
+export function logAnalyticsEvent(eventName: string, params?: Record<string, unknown>) {
+  if (analytics && logEventFn) {
+    logEventFn(analytics, eventName, params);
+  }
+}
