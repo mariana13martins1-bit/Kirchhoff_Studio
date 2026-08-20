@@ -125,15 +125,6 @@ export default function PortfolioSection() {
             {/* Subcategory filters for the active main category */}
             {activeSubVibes && activeSubVibes.length > 0 && (
               <div aria-label="Portfolio subcategory filters" className="flex flex-row flex-wrap gap-3 lg:flex-col lg:gap-3 lg:pl-4 lg:border-l lg:border-white/10">
-                <button
-                  onClick={() => handleSubVibeClick('all')}
-                  aria-pressed={activeSubVibe === 'all'}
-                  className={`text-left whitespace-nowrap text-[8px] lg:text-[9px] uppercase tracking-[0.25em] transition-colors duration-500 ${
-                    activeSubVibe === 'all' ? 'text-white' : 'text-white/40 hover:text-white/70'
-                  }`}
-                >
-                  All {vibes.find((v) => v.id === activeVibe)?.label}
-                </button>
                 {activeSubVibes.map((subVibe) => (
                   <button
                     key={subVibe.id}
@@ -151,7 +142,7 @@ export default function PortfolioSection() {
           </nav>
 
           {/* Grid */}
-          <div ref={gridRef} className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
+          <div ref={gridRef} className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-dense gap-2 md:gap-3 items-start">
             {filteredItems.map((item) => {
               const displayLabel = item.subcategory ?? item.category;
               return (
@@ -159,7 +150,8 @@ export default function PortfolioSection() {
                 key={item.id}
                 role="figure"
                 aria-label={`${item.title} — ${displayLabel.replace('_', ' ')}`}
-                className="portfolio-item group relative overflow-hidden bg-[#0a0a0a] aspect-[4/5] transition-all duration-700"
+                className={`portfolio-item group relative overflow-hidden bg-[#0a0a0a] transition-all duration-700
+                  ${item.size === 'large' ? 'sm:row-span-2 aspect-[4/5] sm:aspect-[3/4.5]' : item.size === 'wide' ? 'sm:col-span-2 aspect-[16/9]' : 'aspect-[4/5]'}`}
               >
                 <img
                   src={getOptimizedUrl(item.image, item.size === 'wide' ? 1600 : 800)}
@@ -173,7 +165,7 @@ export default function PortfolioSection() {
                     ${getOptimizedUrl(item.image, 800)} 800w,
                     ${getOptimizedUrl(item.image, 1200)} 1200w
                   `}
-                  sizes="(max-width: 640px) 100vw, 50vw"
+                  sizes={item.size === 'wide' ? '(max-width: 640px) 100vw, 66vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
                   alt={item.title}
                   loading="lazy"
                   onError={(e) => {
@@ -182,10 +174,6 @@ export default function PortfolioSection() {
                   }}
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 will-change-transform"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent flex flex-col justify-end p-4 md:p-5">
-                  <p className="text-[8px] uppercase tracking-[0.35em] text-white/50 mb-1">{displayLabel.replace('_', ' ')}</p>
-                  <h3 className="font-serif text-lg tracking-widest uppercase">{item.title}</h3>
-                </div>
               </div>
               );
             })}
