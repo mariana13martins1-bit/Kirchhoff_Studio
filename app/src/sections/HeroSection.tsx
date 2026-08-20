@@ -3,6 +3,9 @@ import { Menu, X } from 'lucide-react';
 
 const heroSets = [
   {
+
+      // start with jungle mate photos and also add the wedding photos
+
     category: 'Sports',
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397095/DSC_3754_fnzgml.jpg',

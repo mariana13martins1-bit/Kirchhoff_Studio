@@ -15,6 +15,8 @@ export const vibes = [
 ];
 
 export const portfolioItems = [
+  // MAYBE IT'S BETTER TO OPEN A TAB FOR EVENTS TO PUT THE WEDDING INSIDE THIS, OTHERWISE THERE'S NO PLACE FOR THE WEDDING
+   
   // SPORTS
   { id: 101, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1772666078/DSC_2820_gn3ao7.jpg', title: 'Peak Performance', category: 'sports', size: 'large' },
   { id: 130, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg', title: 'Full send', category: 'sports', size: 'large' },
@@ -71,6 +73,9 @@ export const portfolioItems = [
   { id: 211, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350794/DSC_1928_fzfcr0.jpg', title: 'Authentic glow', category: 'portraits', size: 'medium' },
 
   // COUPLES
+    // THE WEDDING CAN ALSO GO UNDER COUPLES
+
+    
   { id: 312, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396078/DSC_2903_nt9tz5.jpg', title: 'Hold still', category: 'couples', size: 'medium' },
   { id: 308, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg', title: 'Close to you', category: 'couples', size: 'large' },
   { id: 302, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351319/Facetune_25-10-2025-17-18-51_aj5b2y.jpg', title: 'Moments after', category: 'couples', size: 'medium' },
@@ -84,6 +89,9 @@ export const portfolioItems = [
   { id: 305, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351313/DSC_9937_i8sei8.jpg', title: 'Perfect promise', category: 'couples', size: 'small' },
 
   // BRANDS
+      //JUNGLE MATE PHOTOS
+      //....
+
   { id: 400, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351222/8F172B53-2279-46A9-8937-A7023E95A89F_pjqijd.jpg', title: 'Graphic narrative', category: 'brands', size: 'large' },
   { id: 413, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396539/DSC_3831_ma7ghk.jpg', title: 'Editorial eye', category: 'brands', size: 'large' },
   { id: 402, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351186/B2043612-A40C-4DCC-832F-7AF2127E69D6_1_105_c_wbptsj.jpg', title: 'Tied Up', category: 'brands', size: 'medium' },
