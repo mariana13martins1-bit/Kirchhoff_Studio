@@ -1,22 +1,40 @@
-﻿export interface PortfolioItem {
+export interface PortfolioItem {
   id: number;
   image: string;
   title: string;
   category: string;
+  subcategory?: string;
   size: 'small' | 'medium' | 'large' | 'wide';
 }
 
-export const vibes = [
+export interface Vibe {
+  id: string;
+  label: string;
+}
+
+// Top-level portfolio categories
+export const vibes: Vibe[] = [
   { id: 'all', label: 'All Work' },
+  { id: 'events', label: 'Events' },
   { id: 'sports', label: 'Sports' },
-  { id: 'portraits', label: 'Portraits' },
-  { id: 'couples', label: 'Couples' },
   { id: 'brands', label: 'Brands' },
 ];
 
+// Subcategories, keyed by parent category id. Filtering by a subcategory
+// still matches on the parent `category` field plus the `subcategory` field.
+export const subVibes: Record<string, Vibe[]> = {
+  events: [
+    { id: 'weddings', label: 'Weddings' },
+    { id: 'couples', label: 'Couples' },
+    { id: 'portraits', label: 'Portraits' },
+  ],
+  brands: [
+    { id: 'campaigns', label: 'Brand Campaigns' },
+    { id: 'fitness', label: 'Fitness' },
+  ],
+};
+
 export const portfolioItems = [
-  // MAYBE IT'S BETTER TO OPEN A TAB FOR EVENTS TO PUT THE WEDDING INSIDE THIS, OTHERWISE THERE'S NO PLACE FOR THE WEDDING
-   
   // SPORTS
   { id: 101, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1772666078/DSC_2820_gn3ao7.jpg', title: 'Peak Performance', category: 'sports', size: 'large' },
   { id: 130, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg', title: 'Full send', category: 'sports', size: 'large' },
@@ -58,57 +76,51 @@ export const portfolioItems = [
   { id: 129, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351156/0F0B5CCF-AC6C-48FD-9713-16C672A2825B_1_105_c_ayxoh0.jpg', title: 'Victory Lap', category: 'sports', size: 'large' },
 
   // PORTRAITS SECTION
-  { id: 201, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350798/DSC_3269_a6wowm.jpg', title: 'Real moments', category: 'portraits', size: 'small' },
-  { id: 215, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg', title: 'Still presence', category: 'portraits', size: 'large' },
-  { id: 202, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_1812_har1gg.jpg', title: 'Gaze', category: 'portraits', size: 'medium' },
-  { id: 216, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_3216_yyqryg.jpg', title: 'Quiet confidence', category: 'portraits', size: 'small' },
-  { id: 203, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_3276_jqgvn7.jpg', title: 'Motherhood', category: 'portraits', size: 'large' },
-  { id: 217, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg', title: 'Soft light', category: 'portraits', size: 'medium' },
-  { id: 214, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1772667123/DSC_2339_rzrpkc.jpg', title: 'Winter motion', category: 'portraits', size: 'large' },
-  { id: 205, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3180_wsovxm.jpg', title: 'Raw beauty', category: 'portraits', size: 'small' },
-  { id: 218, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_3206_euuv6o.jpg', title: 'In frame', category: 'portraits', size: 'large' },
-  { id: 206, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_2503_shakbg.jpg', title: 'Twin flames', category: 'portraits', size: 'medium' },
-  { id: 210, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_1829_bgyoj0.jpg', title: 'Soft Embrace', category: 'portraits', size: 'large' },
-  { id: 208, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3183_gnmroo.jpg', title: 'The Muse', category: 'portraits', size: 'small' },
-  { id: 211, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350794/DSC_1928_fzfcr0.jpg', title: 'Authentic glow', category: 'portraits', size: 'medium' },
+  { id: 201, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350798/DSC_3269_a6wowm.jpg', title: 'Real moments', category: 'events', subcategory: 'portraits', size: 'small' },
+  { id: 215, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg', title: 'Still presence', category: 'events', subcategory: 'portraits', size: 'large' },
+  { id: 202, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_1812_har1gg.jpg', title: 'Gaze', category: 'events', subcategory: 'portraits', size: 'medium' },
+  { id: 216, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_3216_yyqryg.jpg', title: 'Quiet confidence', category: 'events', subcategory: 'portraits', size: 'small' },
+  { id: 203, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350797/DSC_3276_jqgvn7.jpg', title: 'Motherhood', category: 'events', subcategory: 'portraits', size: 'large' },
+  { id: 217, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg', title: 'Soft light', category: 'events', subcategory: 'portraits', size: 'medium' },
+  { id: 214, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1772667123/DSC_2339_rzrpkc.jpg', title: 'Winter motion', category: 'events', subcategory: 'portraits', size: 'large' },
+  { id: 205, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3180_wsovxm.jpg', title: 'Raw beauty', category: 'events', subcategory: 'portraits', size: 'small' },
+  { id: 218, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_3206_euuv6o.jpg', title: 'In frame', category: 'events', subcategory: 'portraits', size: 'large' },
+  { id: 206, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_2503_shakbg.jpg', title: 'Twin flames', category: 'events', subcategory: 'portraits', size: 'medium' },
+  { id: 210, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_1829_bgyoj0.jpg', title: 'Soft Embrace', category: 'events', subcategory: 'portraits', size: 'large' },
+  { id: 208, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350796/DSC_3183_gnmroo.jpg', title: 'The Muse', category: 'events', subcategory: 'portraits', size: 'small' },
+  { id: 211, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771350794/DSC_1928_fzfcr0.jpg', title: 'Authentic glow', category: 'events', subcategory: 'portraits', size: 'medium' },
 
   // COUPLES
-    // THE WEDDING CAN ALSO GO UNDER COUPLES
-
-    
-  { id: 312, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396078/DSC_2903_nt9tz5.jpg', title: 'Hold still', category: 'couples', size: 'medium' },
-  { id: 308, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg', title: 'Close to you', category: 'couples', size: 'large' },
-  { id: 302, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351319/Facetune_25-10-2025-17-18-51_aj5b2y.jpg', title: 'Moments after', category: 'couples', size: 'medium' },
-  { id: 309, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg', title: 'Tender pull', category: 'couples', size: 'medium' },
-  { id: 307, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351309/DSC_9803_lnqmdo.jpg', title: 'Simply Yes', category: 'couples', size: 'large' },
-  { id: 310, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396080/DSC_2911_ggv56o.jpg', title: 'Undone', category: 'couples', size: 'small' },
-  { id: 304, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351315/DSC_9953_fstufl.jpg', title: 'Shared Laughter', category: 'couples', size: 'medium' },
-  { id: 311, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg', title: 'Golden hour', category: 'couples', size: 'large' },
-  { id: 306, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351311/DSC_9806_kbmjpo.jpg', title: 'The Moment', category: 'couples', size: 'medium' },
-  { id: 300, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351323/Facetune_25-10-2025-17-49-07_hpaft2.jpg', title: 'Pure Joy', category: 'couples', size: 'large' },
-  { id: 305, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351313/DSC_9937_i8sei8.jpg', title: 'Perfect promise', category: 'couples', size: 'small' },
+  { id: 312, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396078/DSC_2903_nt9tz5.jpg', title: 'Hold still', category: 'events', subcategory: 'couples', size: 'medium' },
+  { id: 308, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg', title: 'Close to you', category: 'events', subcategory: 'couples', size: 'large' },
+  { id: 302, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351319/Facetune_25-10-2025-17-18-51_aj5b2y.jpg', title: 'Moments after', category: 'events', subcategory: 'couples', size: 'medium' },
+  { id: 309, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg', title: 'Tender pull', category: 'events', subcategory: 'couples', size: 'medium' },
+  { id: 307, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351309/DSC_9803_lnqmdo.jpg', title: 'Simply Yes', category: 'events', subcategory: 'couples', size: 'large' },
+  { id: 310, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396080/DSC_2911_ggv56o.jpg', title: 'Undone', category: 'events', subcategory: 'couples', size: 'small' },
+  { id: 304, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351315/DSC_9953_fstufl.jpg', title: 'Shared Laughter', category: 'events', subcategory: 'couples', size: 'medium' },
+  { id: 311, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg', title: 'Golden hour', category: 'events', subcategory: 'couples', size: 'large' },
+  { id: 306, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351311/DSC_9806_kbmjpo.jpg', title: 'The Moment', category: 'events', subcategory: 'couples', size: 'medium' },
+  { id: 300, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351323/Facetune_25-10-2025-17-49-07_hpaft2.jpg', title: 'Pure Joy', category: 'events', subcategory: 'couples', size: 'large' },
+  { id: 305, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351313/DSC_9937_i8sei8.jpg', title: 'Perfect promise', category: 'events', subcategory: 'couples', size: 'small' },
 
   // BRANDS
-      //JUNGLE MATE PHOTOS
-      //....
-
-  { id: 400, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351222/8F172B53-2279-46A9-8937-A7023E95A89F_pjqijd.jpg', title: 'Graphic narrative', category: 'brands', size: 'large' },
-  { id: 413, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396539/DSC_3831_ma7ghk.jpg', title: 'Editorial eye', category: 'brands', size: 'large' },
-  { id: 402, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351186/B2043612-A40C-4DCC-832F-7AF2127E69D6_1_105_c_wbptsj.jpg', title: 'Tied Up', category: 'brands', size: 'medium' },
-  { id: 414, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396537/DSC_4088_jhqori.jpg', title: 'Product story', category: 'brands', size: 'wide' },
-  { id: 403, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351185/B2187C64-93E6-47F1-B089-B0DE99E691D8_1_105_c_lxqhpl.jpg', title: 'Striped Legacy', category: 'brands', size: 'large' },
-  { id: 415, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396530/DSC_4047_u19uer.jpg', title: 'Clean lines', category: 'brands', size: 'small' },
-  { id: 405, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351179/82F6AA66-643B-49E6-8EB7-3D005B132C63_jdi4hq.jpg', title: 'BW DRAMA', category: 'brands', size: 'small' },
-  { id: 416, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396528/DSC_3943_app91t.jpg', title: 'Brand identity', category: 'brands', size: 'large' },
-  { id: 408, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351163/3A5E290A-8B9D-4C04-BE24-E011680BB326_1_105_c_nzlocm.jpg', title: 'Detail Oriented', category: 'brands', size: 'small' },
-  { id: 417, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396525/DSC_4134_fri4wl.jpg', title: 'Mood driven', category: 'brands', size: 'medium' },
-  { id: 409, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351161/1FDEF871-23E4-4D2F-AABD-A983334CDD15_1_105_c_s06e0t.jpg', title: 'POV', category: 'brands', size: 'medium' },
-  { id: 418, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396524/DSC_4087_xq7url.jpg', title: 'Visual tone', category: 'brands', size: 'wide' },
-  { id: 410, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351159/1E0A90C7-FC25-444D-A88A-23958CCC98CE_1_105_c_ppjaww.jpg', title: 'Brown Power', category: 'brands', size: 'large' },
-  { id: 419, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396522/DSC_3826_sc5ahj.jpg', title: 'Curated frame', category: 'brands', size: 'large' },
-  { id: 411, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351158/0FE44B76-7266-4EC6-8A97-A094ED34D1F7_pb7ilb.jpg', title: 'Graphic', category: 'brands', size: 'medium' },
-  { id: 420, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396521/DSC_3802_pkbiix.jpg', title: 'Sharp detail', category: 'brands', size: 'medium' },
-  { id: 412, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351155/0BFC37DD-C343-481E-B4FF-5DEFBDAE9B62_1_105_c_tznfng.jpg', title: 'Core Values', category: 'brands', size: 'small' },
+  { id: 400, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351222/8F172B53-2279-46A9-8937-A7023E95A89F_pjqijd.jpg', title: 'Graphic narrative', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 413, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396539/DSC_3831_ma7ghk.jpg', title: 'Editorial eye', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 402, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351186/B2043612-A40C-4DCC-832F-7AF2127E69D6_1_105_c_wbptsj.jpg', title: 'Tied Up', category: 'brands', subcategory: 'campaigns', size: 'medium' },
+  { id: 414, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396537/DSC_4088_jhqori.jpg', title: 'Product story', category: 'brands', subcategory: 'campaigns', size: 'wide' },
+  { id: 403, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351185/B2187C64-93E6-47F1-B089-B0DE99E691D8_1_105_c_lxqhpl.jpg', title: 'Striped Legacy', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 415, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396530/DSC_4047_u19uer.jpg', title: 'Clean lines', category: 'brands', subcategory: 'campaigns', size: 'small' },
+  { id: 405, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351179/82F6AA66-643B-49E6-8EB7-3D005B132C63_jdi4hq.jpg', title: 'BW DRAMA', category: 'brands', subcategory: 'campaigns', size: 'small' },
+  { id: 416, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396528/DSC_3943_app91t.jpg', title: 'Brand identity', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 408, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351163/3A5E290A-8B9D-4C04-BE24-E011680BB326_1_105_c_nzlocm.jpg', title: 'Detail Oriented', category: 'brands', subcategory: 'campaigns', size: 'small' },
+  { id: 417, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396525/DSC_4134_fri4wl.jpg', title: 'Mood driven', category: 'brands', subcategory: 'campaigns', size: 'medium' },
+  { id: 409, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351161/1FDEF871-23E4-4D2F-AABD-A983334CDD15_1_105_c_s06e0t.jpg', title: 'POV', category: 'brands', subcategory: 'campaigns', size: 'medium' },
+  { id: 418, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396524/DSC_4087_xq7url.jpg', title: 'Visual tone', category: 'brands', subcategory: 'campaigns', size: 'wide' },
+  { id: 410, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351159/1E0A90C7-FC25-444D-A88A-23958CCC98CE_1_105_c_ppjaww.jpg', title: 'Brown Power', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 419, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396522/DSC_3826_sc5ahj.jpg', title: 'Curated frame', category: 'brands', subcategory: 'campaigns', size: 'large' },
+  { id: 411, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351158/0FE44B76-7266-4EC6-8A97-A094ED34D1F7_pb7ilb.jpg', title: 'Graphic', category: 'brands', subcategory: 'campaigns', size: 'medium' },
+  { id: 420, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396521/DSC_3802_pkbiix.jpg', title: 'Sharp detail', category: 'brands', subcategory: 'campaigns', size: 'medium' },
+  { id: 412, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351155/0BFC37DD-C343-481E-B4FF-5DEFBDAE9B62_1_105_c_tznfng.jpg', title: 'Core Values', category: 'brands', subcategory: 'campaigns', size: 'small' },
 
   //ABOUT ME
   { id: 999, image: 'https://res.cloudinary.com/djaacn6yd/image/upload/v1771361418/Face_card_vubk5s.jpg', title: 'Kirchhoff Portrait', category: 'about', size: 'large' },

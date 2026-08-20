@@ -198,13 +198,16 @@ export default function ContactSection() {
                 required
               >
                 <option value="" className="bg-black">Project Type</option>
-                <option value="events" className="bg-black">Events</option>
-                <option value="portrait" className="bg-black">Portraits</option>
-                <option value="couples" className="bg-black">Couples</option>
+                <optgroup label="Events" className="bg-black">
+                  <option value="weddings" className="bg-black">Wedding</option>
+                  <option value="couples" className="bg-black">Couples</option>
+                  <option value="portraits" className="bg-black">Portraits</option>
+                </optgroup>
                 <option value="sports" className="bg-black">Sports</option>
-                <option value="brands" className="bg-black">Brand</option>
-
-
+                <optgroup label="Brands" className="bg-black">
+                  <option value="campaigns" className="bg-black">Brand Campaign</option>
+                  <option value="fitness" className="bg-black">Fitness</option>
+                </optgroup>
               </select>
               <div className="absolute right-0 bottom-4 pointer-events-none">
                 <ArrowRight className="w-4 h-4 text-white/20 rotate-90" />

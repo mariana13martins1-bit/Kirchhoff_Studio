@@ -1,7 +1,7 @@
 import { useState, useRef, useLayoutEffect, useMemo } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { portfolioItems, vibes } from '../data/portfolio.ts';
+import { portfolioItems, vibes, subVibes } from '../data/portfolio.ts';
 import type { PortfolioItem } from '../data/portfolio.ts';
 import { getOptimizedUrl } from '../utils/cloudinary';
 import { logAnalyticsEvent } from '../services/firebase';
@@ -11,9 +11,23 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function PortfolioSection() {
   const [activeVibe, setActiveVibe] = useState('all');
+  const [activeSubVibe, setActiveSubVibe] = useState('all');
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
+
+  const activeSubVibes = activeVibe !== 'all' ? subVibes[activeVibe] : undefined;
+
+  const handleVibeClick = (vibeId: string) => {
+    setActiveVibe(vibeId);
+    setActiveSubVibe('all');
+    logAnalyticsEvent('portfolio_filter', { category: vibeId });
+  };
+
+  const handleSubVibeClick = (subVibeId: string) => {
+    setActiveSubVibe(subVibeId);
+    logAnalyticsEvent('portfolio_filter', { category: activeVibe, subcategory: subVibeId });
+  };
 
   const filteredItems = useMemo(() => {
     const allItems = (portfolioItems as PortfolioItem[]).filter(
@@ -26,8 +40,14 @@ export default function PortfolioSection() {
         .slice(0, 12);
     }
 
-    return allItems.filter((item: any) => item.category === activeVibe);
-  }, [activeVibe]);
+    const byCategory = allItems.filter((item) => item.category === activeVibe);
+
+    if (activeSubVibe === 'all') {
+      return byCategory;
+    }
+
+    return byCategory.filter((item) => item.subcategory === activeSubVibe);
+  }, [activeVibe, activeSubVibe]);
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -84,30 +104,61 @@ export default function PortfolioSection() {
           {/* Filter Nav: horizontal scroll row on mobile, sticky vertical sidebar on lg+ */}
           <nav
             aria-label="Portfolio filters"
-            className="flex flex-row gap-8 overflow-x-auto no-scrollbar scroll-smooth mb-12
-              lg:mb-0 lg:flex-col lg:w-48 lg:shrink-0 lg:gap-6 lg:overflow-visible lg:sticky lg:top-32 lg:self-start"
+            className="flex flex-col gap-8 mb-12
+              lg:mb-0 lg:w-48 lg:shrink-0 lg:sticky lg:top-32 lg:self-start"
           >
-            {vibes.map((vibe) => (
-              <button
-                key={vibe.id}
-                onClick={() => { setActiveVibe(vibe.id); logAnalyticsEvent('portfolio_filter', { category: vibe.id }); }}
-                aria-pressed={activeVibe === vibe.id}
-                className={`text-left whitespace-nowrap text-[9px] lg:text-[10px] uppercase tracking-[0.3em] transition-colors duration-500 pb-2 lg:pb-0 border-b-2 lg:border-b-0 ${
-                  activeVibe === vibe.id ? 'text-white border-white' : 'text-white/40 border-transparent hover:text-white/70'
-                }`}
-              >
-                {vibe.label}
-              </button>
-            ))}
+            <div className="flex flex-row gap-8 overflow-x-auto no-scrollbar scroll-smooth lg:flex-col lg:gap-6 lg:overflow-visible">
+              {vibes.map((vibe) => (
+                <button
+                  key={vibe.id}
+                  onClick={() => handleVibeClick(vibe.id)}
+                  aria-pressed={activeVibe === vibe.id}
+                  className={`text-left whitespace-nowrap text-[9px] lg:text-[10px] uppercase tracking-[0.3em] transition-colors duration-500 pb-2 lg:pb-0 border-b-2 lg:border-b-0 ${
+                    activeVibe === vibe.id ? 'text-white border-white' : 'text-white/40 border-transparent hover:text-white/70'
+                  }`}
+                >
+                  {vibe.label}
+                </button>
+              ))}
+            </div>
+
+            {/* Subcategory filters for the active main category */}
+            {activeSubVibes && activeSubVibes.length > 0 && (
+              <div aria-label="Portfolio subcategory filters" className="flex flex-row flex-wrap gap-3 lg:flex-col lg:gap-3 lg:pl-4 lg:border-l lg:border-white/10">
+                <button
+                  onClick={() => handleSubVibeClick('all')}
+                  aria-pressed={activeSubVibe === 'all'}
+                  className={`text-left whitespace-nowrap text-[8px] lg:text-[9px] uppercase tracking-[0.25em] transition-colors duration-500 ${
+                    activeSubVibe === 'all' ? 'text-white' : 'text-white/40 hover:text-white/70'
+                  }`}
+                >
+                  All {vibes.find((v) => v.id === activeVibe)?.label}
+                </button>
+                {activeSubVibes.map((subVibe) => (
+                  <button
+                    key={subVibe.id}
+                    onClick={() => handleSubVibeClick(subVibe.id)}
+                    aria-pressed={activeSubVibe === subVibe.id}
+                    className={`text-left whitespace-nowrap text-[8px] lg:text-[9px] uppercase tracking-[0.25em] transition-colors duration-500 ${
+                      activeSubVibe === subVibe.id ? 'text-white' : 'text-white/40 hover:text-white/70'
+                    }`}
+                  >
+                    {subVibe.label}
+                  </button>
+                ))}
+              </div>
+            )}
           </nav>
 
           {/* Grid */}
           <div ref={gridRef} className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-3">
-            {filteredItems.map((item) => (
+            {filteredItems.map((item) => {
+              const displayLabel = item.subcategory ?? item.category;
+              return (
               <div
                 key={item.id}
                 role="figure"
-                aria-label={`${item.title} — ${item.category.replace('_', ' ')}`}
+                aria-label={`${item.title} — ${displayLabel.replace('_', ' ')}`}
                 className="portfolio-item group relative overflow-hidden bg-[#0a0a0a] aspect-[4/5] transition-all duration-700"
               >
                 <img
@@ -132,11 +183,12 @@ export default function PortfolioSection() {
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 will-change-transform"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/5 to-transparent flex flex-col justify-end p-4 md:p-5">
-                  <p className="text-[8px] uppercase tracking-[0.35em] text-white/50 mb-1">{item.category.replace('_', ' ')}</p>
+                  <p className="text-[8px] uppercase tracking-[0.35em] text-white/50 mb-1">{displayLabel.replace('_', ' ')}</p>
                   <h3 className="font-serif text-lg tracking-widest uppercase">{item.title}</h3>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </div>
