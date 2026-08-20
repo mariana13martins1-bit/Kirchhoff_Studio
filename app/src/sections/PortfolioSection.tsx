@@ -332,7 +332,10 @@ export default function PortfolioSection() {
                         {vibeSubVibes.map((subVibe) => {
                           const subSubs = subSubVibes[subVibe.id];
                           const isSubActive = activeSubVibe === subVibe.id;
-                          const isSubExpanded = isSubActive && subSubMenuOpen;
+                          // Desktop has room to keep the sub-subcategory list open at all
+                          // times rather than collapsing it on selection like mobile does
+                          // to save space — subSubMenuOpen only governs the mobile view.
+                          const isSubExpanded = isSubActive;
                           return (
                             <div key={subVibe.id} className="flex flex-col items-start gap-2">
                               <button
