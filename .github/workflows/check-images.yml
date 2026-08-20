@@ -1,0 +1,25 @@
+name: Check portfolio image links
+
+on:
+  schedule:
+    # Every Monday at 09:00 UTC — catches Cloudinary assets that were
+    # renamed/deleted/moved outside of a code change.
+    - cron: '0 9 * * 1'
+  push:
+    branches: [main]
+    paths:
+      - 'app/src/data/portfolio.ts'
+  workflow_dispatch: {}
+
+jobs:
+  check-images:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm run check:images

@@ -8,7 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "fetch:cloudinary": "node scripts/fetch-cloudinary-urls.js"
+    "fetch:cloudinary": "node scripts/fetch-cloudinary-urls.js",
+    "check:images": "node scripts/check-image-links.js"
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",

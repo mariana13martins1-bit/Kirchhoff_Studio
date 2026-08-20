@@ -16,6 +16,7 @@ export default function PortfolioSection() {
   const [activeSubSubVibe, setActiveSubSubVibe] = useState('all');
   const [subMenuOpen, setSubMenuOpen] = useState(true);
   const [subSubMenuOpen, setSubSubMenuOpen] = useState(true);
+  const [brokenImageIds, setBrokenImageIds] = useState<Set<number>>(new Set());
   const sectionRef = useRef<HTMLElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const isFirstRender = useRef(true);
@@ -126,6 +127,14 @@ export default function PortfolioSection() {
     return bySubCategory.filter((item) => item.subsubcategory === activeSubSubVibe);
   }, [activeVibe, activeSubVibe, activeSubSubVibe]);
 
+  // Cloudinary URLs are a point-in-time snapshot (see scripts/fetch-cloudinary-urls.js) —
+  // if an asset is later renamed/deleted, its <img> 404s. Rather than leaving a black hole
+  // in the grid, drop that tile once it's confirmed broken so the layout just reflows.
+  const visibleItems = useMemo(
+    () => filteredItems.filter((item) => !brokenImageIds.has(item.id)),
+    [filteredItems, brokenImageIds]
+  );
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       ScrollTrigger.getAll().forEach(st => {
@@ -171,7 +180,7 @@ export default function PortfolioSection() {
       ScrollTrigger.refresh();
     }, sectionRef);
     return () => ctx.revert();
-  }, [filteredItems]);
+  }, [visibleItems]);
 
   return (
     <section ref={sectionRef} id="portfolio" className="py-24 lg:py-32 bg-black text-white selection:bg-white selection:text-black">
@@ -373,7 +382,7 @@ export default function PortfolioSection() {
 
           {/* Grid */}
           <div ref={gridRef} className="flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 grid-flow-dense gap-2 md:gap-3 items-start">
-            {filteredItems.map((item) => {
+            {visibleItems.map((item) => {
               const displayLabel = item.subcategory ?? item.category;
               return (
               <div
@@ -406,9 +415,11 @@ export default function PortfolioSection() {
                   sizes={item.size === 'wide' ? '(max-width: 640px) 100vw, 66vw' : '(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw'}
                   alt={item.title}
                   loading="lazy"
-                  onError={(e) => {
-                    (e.currentTarget as HTMLImageElement).style.visibility = 'hidden';
+                  onError={() => {
                     reportBrokenImage(item.image, item.title, item.category);
+                    setBrokenImageIds((prev) => (
+                      prev.has(item.id) ? prev : new Set(prev).add(item.id)
+                    ));
                   }}
                   className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105 will-change-transform"
                 />
