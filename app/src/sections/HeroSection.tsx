@@ -1,7 +1,13 @@
 ﻿import { useState, useEffect, useCallback } from 'react';
 import { Menu, X } from 'lucide-react';
 
-const heroSets = [
+type HeroSet = {
+  category: string;
+  images: string[];
+  imagePositions?: string[];
+};
+
+const heroSets: HeroSet[] = [
   {
     category: 'Jungle Mate',
     images: [
@@ -13,8 +19,8 @@ const heroSets = [
   {
     category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231107/DSC_9263_or5ijm.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231102/DSC_9191_azotjo.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231107/DSC_9263_or5ijm.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231106/DSC_9248_eopyp2.jpg'
     ]
   },
@@ -23,7 +29,7 @@ const heroSets = [
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231129/DSC_9404_xkmlrs.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231133/DSC_9431_q552rd.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231123/DSC_9386_fbcarx.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231126/DSC_9389_odrdxx.jpg'
     ]
   },
   {
@@ -40,7 +46,8 @@ const heroSets = [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254683/DSC_5450_ziweei.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254680/DSC_5443_cm9p4m.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254700/DSC_5531_du6c4g.jpg'
-    ]
+    ],
+    imagePositions: ['35% center']
   },
   {
     category: 'Portraits',
@@ -100,6 +107,7 @@ export default function HeroSection() {
                   <img
                     src={set.images[columnIndex].replace('/upload/', '/upload/f_auto,q_auto,w_1000/')}
                     alt={`${set.category} ${columnIndex}`}
+                    style={{ objectPosition: set.imagePositions?.[columnIndex] ?? 'center' }}
                     className={`w-full h-full object-cover brightness-[0.4] transition-transform duration-[5000ms] ease-out ${
                       currentSetIndex === setIndex ? 'scale-110' : 'scale-100'
                     }`}
