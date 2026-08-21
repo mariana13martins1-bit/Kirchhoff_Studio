@@ -51,7 +51,7 @@ export const subSubVibes: Record<string, Vibe[]> = {
     { id: 'm_c', label: 'M&C' },
   ],
   weddings: [
-    { id: 'a_k', label: 'A&K' },
+    { id: 'a_k', label: 'A&T' },
   ],
 };
 
