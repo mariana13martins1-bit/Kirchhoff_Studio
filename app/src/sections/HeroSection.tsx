@@ -13,9 +13,9 @@ const heroSets = [
   {
     category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231088/DSC_9008_qhgwbl.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231107/DSC_9263_or5ijm.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231102/DSC_9191_azotjo.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231094/DSC_9170_bdznak.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231106/DSC_9248_eopyp2.jpg'
     ]
   },
   {
@@ -23,15 +23,23 @@ const heroSets = [
     images: [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231129/DSC_9404_xkmlrs.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231133/DSC_9431_q552rd.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231116/DSC_9396_zaqllh.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231123/DSC_9386_fbcarx.jpg'
     ]
   },
   {
     category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230178/DSC_6360_ykur0w.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230173/DSC_6253_nati4u.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230185/DSC_6418_aioqrf.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230183/DSC_6346_ivt6zl.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230195/DSC_6550_vxqeae.jpg'
+    ]
+  },
+  {
+    category: 'Weddings',
+    images: [
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254683/DSC_5450_ziweei.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254680/DSC_5443_cm9p4m.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787254700/DSC_5531_du6c4g.jpg'
     ]
   },
   {
@@ -40,14 +48,6 @@ const heroSets = [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg',
-    ]
-  },
-  {
-    category: 'Couples',
-    images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg'
     ]
   }
 ];
