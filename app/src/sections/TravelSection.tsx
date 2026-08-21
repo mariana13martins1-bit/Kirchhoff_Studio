@@ -96,8 +96,8 @@ export default function TravelSection() {
           <span className="italic font-light text-white/50">Archive</span>
         </h2>
         {/* Hidden on mobile to reduce clutter */}
-        <p className="hidden lg:block mt-8 text-[11px] uppercase tracking-[0.3em] text-white/30 font-light leading-relaxed">
-          Danish eyes, <br /> 
+        <p className="hidden lg:block mt-8 text-[11px] uppercase tracking-[0.3em] text-white/30 font-light leading-relaxed italic">
+          Danish eyes, <br />
           global perspectives.
         </p>
       </div>
