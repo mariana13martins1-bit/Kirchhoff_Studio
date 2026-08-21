@@ -3,38 +3,35 @@ import { Menu, X } from 'lucide-react';
 
 const heroSets = [
   {
-
-      // start with jungle mate photos and also add the wedding photos
-
-    category: 'Sports',
+    category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397095/DSC_3754_fnzgml.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396539/DSC_3831_ma7ghk.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396530/DSC_4047_u19uer.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231057/DSC_8668_vaxhb9.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231081/DSC_8762_icelwr.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231059/DSC_8694_nkeuy2.jpg'
     ]
   },
   {
-    category: 'Sports',
+    category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351193/D27307F8-FD73-4308-8E93-E519AB45E5C2_1_105_c_wxqcrr.jpg',     
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351162/2D34C55F-ECF7-4FB0-81F9-351EB33765F4_1_105_c_i8wmty.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351186/B2043612-A40C-4DCC-832F-7AF2127E69D6_1_105_c_wbptsj.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231088/DSC_9008_qhgwbl.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231102/DSC_9191_azotjo.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231094/DSC_9170_bdznak.jpg'
     ]
   },
   {
-    category: 'Proposal',
+    category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351317/Facetune_25-10-2025-17-14-49_lsiov7.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351323/Facetune_25-10-2025-17-49-07_hpaft2.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1771351319/Facetune_25-10-2025-17-18-51_aj5b2y.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231129/DSC_9404_xkmlrs.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231133/DSC_9431_q552rd.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787231116/DSC_9396_zaqllh.jpg'
     ]
   },
   {
-    category: 'Couples',
+    category: 'Jungle Mate',
     images: [
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg',
-      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg'
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230178/DSC_6360_ykur0w.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230185/DSC_6418_aioqrf.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1787230183/DSC_6346_ivt6zl.jpg'
     ]
   },
   {
@@ -43,6 +40,14 @@ const heroSets = [
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396656/DSC_4357_k6hiom.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777397111/DSC_4300_vawo2q.jpg',
       'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396654/DSC_4349_ql6yzc.jpg',
+    ]
+  },
+  {
+    category: 'Couples',
+    images: [
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396093/DSC_2901_kceodx.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396084/DSC_2936_ukh7f3.jpg',
+      'https://res.cloudinary.com/djaacn6yd/image/upload/v1777396079/DSC_2909_serjye.jpg'
     ]
   }
 ];
