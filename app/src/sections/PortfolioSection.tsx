@@ -176,8 +176,6 @@ export default function PortfolioSection() {
           gridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       }
-
-      ScrollTrigger.refresh();
     }, sectionRef);
     return () => ctx.revert();
   }, [visibleItems]);

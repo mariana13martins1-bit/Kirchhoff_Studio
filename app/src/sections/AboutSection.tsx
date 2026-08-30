@@ -107,17 +107,13 @@ export default function AboutSection() {
             {/* First Block: Philosophy & Style */}
             <div className="space-y-4">
               <p className="text-sm text-white/70 leading-relaxed font-light tracking-wide">
-                I create emotion-driven imagery that captures moments with depth, atmosphere, and intention. 
-                My work is rooted in storytelling - focusing on movement, connection, and the subtle details. 
-                Rather than staging perfection, I document authenticity as it naturally unfolds.
+                I create emotion-driven imagery that captures moments with depth, atmosphere, and intention. My work moves between fashion, brands, sport, and events, combining a documentary eye with a strong sense of visual storytelling. Whether creating for a brand or documenting a moment as it unfolds, I focus on movement, connection, and the details that give an image its character. Rather than staging perfection, I aim to create imagery that feels authentic, intentional, and alive.
               </p>
             </div>
 
             <div className="space-y-4">
               <p className="text-sm text-white/60 leading-relaxed font-light tracking-wide">
-                From high-energy environments to intimate milestones, I approach every shoot with a calm, observant eye and a strong sense of narrative. 
-                I aim to deliver images that feel timeless, powerful, and emotionally real. 
-                Each frame is crafted to preserve the feeling of the moment, not just how it looked.
+                From editorial and fashion-driven campaigns to high-energy sporting environments and unforgettable events, I approach every shoot with a calm, observant eye and a strong sense of narrative. I look for the moments that feel natural - the movement, the energy, the in-between, the details. My aim is to create imagery that feels timeless, distinctive, and emotionally real, preserving not only how a moment looked, but how it felt.
               </p>
             </div>
           </div>
